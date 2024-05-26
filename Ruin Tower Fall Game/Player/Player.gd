@@ -1,11 +1,31 @@
-extends Node
+extends CharacterBody2D
 
+var playerInput = Vector2.ZERO
 
-# Called when the node enters the scene tree for the first time.
+@export var speed := 400
+
+func GetPlayerInput():
+	playerInput = Vector2.ZERO
+	
+	if (Input.is_action_pressed("Left")):
+		playerInput.x -= 1
+	if (Input.is_action_pressed("Right")):
+		playerInput.x += 1
+	if (Input.is_action_pressed("Up")):
+		playerInput.y -= 1
+	if (Input.is_action_pressed("Down")):
+		playerInput.y += 1
+
+func SetPlayerMovement(delta):
+	velocity = playerInput.normalized() * speed * delta
+
 func _ready():
-	pass # Replace with function body.
+	pass
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
-	pass
+	GetPlayerInput()
+	SetPlayerMovement(1)
+	print(velocity)
+	move_and_slide()
