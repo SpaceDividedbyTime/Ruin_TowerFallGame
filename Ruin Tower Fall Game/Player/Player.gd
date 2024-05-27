@@ -27,5 +27,4 @@ func _ready():
 func _process(delta):
 	GetPlayerInput()
 	SetPlayerMovement(1)
-	print(velocity)
 	move_and_slide()
